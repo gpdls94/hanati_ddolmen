@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 public class CameraActivity extends AppCompatActivity {
+
+    private static final int MY_PERMISSION_CAMERA = 1111;
 
     ImageView imageView;
     Button btn_send;
@@ -23,16 +26,25 @@ public class CameraActivity extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,1);
+                startActivityForResult(intent, 1);
             }
         });
 
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(getApplicationContext(), ResultActivity.class);
-                startActivity(it);
+                /*int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
+
+                if(permissionCheck == PackageManager.PERMISSION_DENIED) {
+
+                } else {
+                    ActivityCompat.requestPermissions(getParent(), new String[] {Manifest.permission.CAMERA}, 1);
+                }*/
+                Intent it = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
+                startActivityForResult(it, 0);
+
             }
         });
     }
@@ -45,7 +57,15 @@ public class CameraActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //Log.e("aaaaaa", data.getDataString());
-        imageView.setImageURI(data.getData());
+        Log.e("aaaaaa", "requestCode : " + String.valueOf(requestCode));
+        Log.e("aaaaaa", "resultCode : " + String.valueOf(resultCode));
+        Log.e("aaaaaa", "data : " + data.getData());
+        //imageView.setImageURI(data.getData());
+
+
+
+
     }
+
+
 }
