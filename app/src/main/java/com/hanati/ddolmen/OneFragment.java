@@ -32,6 +32,7 @@ public class OneFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent it = new Intent(getContext(), CameraActivity.class);
+                //Intent it = new Intent(getContext(), ResultActivity.class);
                 startActivity(it);
             }
         });
