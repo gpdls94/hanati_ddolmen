@@ -1,6 +1,9 @@
 package com.hanati.ddolmen;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -17,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
         initView();
 
-
+        viewPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
+        viewPager.setCurrentItem(0);
     }
 
     void initView(){    //화면의 View 정의
@@ -33,3 +37,28 @@ public class MainActivity extends AppCompatActivity {
 
 }
 
+class PageAdapter extends FragmentStatePagerAdapter{
+
+    public PageAdapter(FragmentManager fm){
+        super(fm);
+    }
+
+    @Override
+    public Fragment getItem(int i) {
+        switch (i){
+            case 0:
+                return new OneFragment();
+            case 1:
+                return new TwoFragment();
+            case 2:
+                return new ThreeFragment();
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public int getCount() {
+        return 3;
+    }
+}
