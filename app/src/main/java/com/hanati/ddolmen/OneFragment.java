@@ -1,12 +1,10 @@
 package com.hanati.ddolmen;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 
 public class OneFragment extends Fragment {
@@ -27,14 +25,6 @@ public class OneFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_one, container, false);
-        TextView test = (TextView)view.findViewById(R.id.test);
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(getContext(), CameraActivity.class);
-                startActivity(it);
-            }
-        });
         return view;
     }
 

@@ -2,16 +2,23 @@ package com.hanati.ddolmen;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 public class CameraActivity extends AppCompatActivity {
 
     ImageView imageView;
-    Button btn_send;
+    ImageButton btn_send;
+    LinearLayout loading;
+    ImageView loading_icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +38,32 @@ public class CameraActivity extends AppCompatActivity {
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(getApplicationContext(), ResultActivity.class);
-                startActivity(it);
+
+                loading.setVisibility(View.VISIBLE);
+
+                GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(loading_icon);
+                Glide.with(CameraActivity.this).load(R.drawable.load2).into(imageViewTarget);
+
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent it = new Intent(getApplicationContext(), ResultActivity.class);
+                        startActivity(it);
+
+                        loading.setVisibility(View.GONE);
+                    }
+                };
+                handler.postDelayed(runnable, 1800);
             }
         });
     }
 
     void initView(){
         imageView = (ImageView)findViewById(R.id.img_selected);
-        btn_send = (Button)findViewById(R.id.btn_send);
+        btn_send = (ImageButton)findViewById(R.id.btn_send);
+        loading = (LinearLayout)findViewById(R.id.loading);
+        loading_icon = (ImageView)findViewById(R.id.icon);
     }
 
     @Override

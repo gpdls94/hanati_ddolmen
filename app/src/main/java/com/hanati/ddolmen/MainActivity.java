@@ -25,11 +25,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void initView(){    //화면의 View 정의
-        btn_history = (Button)findViewById(R.id.btn_history);
-        btn_counsel = (Button)findViewById(R.id.btn_counsel);
-        btn_join = (Button)findViewById(R.id.btn_join);
-        btn_hanamembers = (Button)findViewById(R.id.btn_hanamembers);
-        btn_hanalife = (Button)findViewById(R.id.btn_hanalife);
 
         viewPager = (ViewPager)findViewById(R.id.viewPager);
     }
