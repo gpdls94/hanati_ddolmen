@@ -42,7 +42,7 @@ public class CameraActivity extends AppCompatActivity {
                 loading.setVisibility(View.VISIBLE);
 
                 GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(loading_icon);
-                Glide.with(CameraActivity.this).load(R.drawable.load2).into(imageViewTarget);
+                Glide.with(CameraActivity.this).load(R.drawable.load3).into(imageViewTarget);
 
                 Handler handler = new Handler();
                 Runnable runnable = new Runnable() {
@@ -54,7 +54,7 @@ public class CameraActivity extends AppCompatActivity {
                         loading.setVisibility(View.GONE);
                     }
                 };
-                handler.postDelayed(runnable, 1800);
+                handler.postDelayed(runnable, 1900);
             }
         });
     }
